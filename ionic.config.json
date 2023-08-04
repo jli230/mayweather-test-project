@@ -1,0 +1,7 @@
+{
+  "name": "mayweather test project",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
