@@ -22,6 +22,8 @@ export class LoginPage implements OnInit {
   public loginForm: FormGroup;
   loading = false;
   authToken = '';
+  user! : PostData;
+  // string authToken = '';
   // public testarray : AuthResponse;
   constructor(
     // private zone: NgZone,
@@ -107,17 +109,34 @@ export class LoginPage implements OnInit {
   // }
 
   onLogin() {
-    this.http
-      .post('https://api.accuropt.com/apt/users/actions/login', {
+    // this.http
+    //   .post('https://api.accuropt.com/apt/users/actions/login', {
+    //     email: this.loginForm.value.identifier,
+    //     password: this.loginForm.value.password,
+    //   }).subscribe((response) => {
+    //     // this.user = response;
+    //     // this.authToken = response.data.token;
+    //     // JSON.parse(response.data)
+    //     console.log(response["data"]);
+    //     // this.testarray = response.data.json();
+    //     // this.authToken = response.data;
+    //   });
+    fetch("https://api.accuropt.com/apt/users/actions/login", {
+      method: "POST",
+      body: JSON.stringify({
         email: this.loginForm.value.identifier,
         password: this.loginForm.value.password,
-      }).subscribe((response) => {
-
-        this.authToken = JSON.parse(JSON.stringify(response)).data.token;
-        console.log(this.authToken);
-        // this.testarray = response.data.json();
-        // this.authToken = response.data;
-      });
+      }),
+      headers: {
+          "Content-type": "application/json; charset=UTF-8"
+      }
+    })
+    .then(response => response.json())
+    .then( data => {
+      this.authToken = data.data.token;
+      // console.log(data);
+    });
+    console.log(this.authToken);
   }
     // if (!this.loginForm.value.identifier) {
     //   this.utils.presentToastWithTranslate('WARNING_EMPTY_IDENTIFIER', {
