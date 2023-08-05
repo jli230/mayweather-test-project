@@ -1,0 +1,31 @@
+<ion-content [fullscreen]="true" [scrollY]="false" class="ion-no-padding login-page">
+  <ion-header transparent>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-back-button color="light" text="" defaultHref="/"></ion-back-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+
+  <div class="cloak-form-content">
+    <h1 class="cloak-page-title">{{ 'LOGIN' }}</h1>
+
+    <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+      <ion-item lines="none" class="ion-no-padding">
+        <ion-input appAutofill type="email" autocomplete="email" formControlName="identifier"
+          placeholder="{{ 'IDENTIFIER' }}"></ion-input>
+      </ion-item>
+      <ion-item lines="none" class="ion-no-padding">
+        <ion-input appAutofill id="password" type="password" autocomplete="current-password" formControlName="password"
+          placeholder="{{ 'PASSWORD' }}"></ion-input>
+      </ion-item>
+      <ion-button *ngIf="!loading" class="ion-no-padding action-btn" color="primary" type="submit" shape="round"
+        expand="block">{{ 'LOGIN' }}</ion-button>
+      <ion-button *ngIf="loading" class="ion-no-padding action-btn" color="primary" shape="round" expand="block"
+        disabled><ion-spinner color="light" name="crescent"></ion-spinner></ion-button>
+      <!-- <p class="ion-text-center forgot-password" (click)="goForgotPassword()">
+        {{ 'FORGOT_PASSWORD' }}
+      </p> -->
+    </form>
+  </div>
+</ion-content>
