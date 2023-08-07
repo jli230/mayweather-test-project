@@ -13,5 +13,24 @@
     </ion-toolbar>
   </ion-header>
 
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+  <div class="cloak-form-content">
+    <form [formGroup]="listForm" (ngSubmit)="onSubmit()">
+      <ion-item lines="none" class="ion-no-padding">
+        <ion-input appAutofill id="month" type="number" autocomplete="1" formControlName="month"
+          placeholder="{{ 'MONTH' }}"></ion-input>
+      </ion-item>
+      <ion-item lines="none" class="ion-no-padding">
+        <ion-input appAutofill id="day" type="number" autocomplete="1" formControlName="day"
+          placeholder="{{ 'DAY' }}"></ion-input>
+      </ion-item>
+      <ion-item lines="none" class="ion-no-padding">
+        <ion-input appAutofill id="year" type="number" autocomplete="2023" formControlName="year"
+          placeholder="{{ 'YEAR' }}"></ion-input>
+      </ion-item>
+      <ion-button *ngIf="!loading" class="ion-no-padding action-btn" color="primary" type="submit" shape="round"
+        expand="block">{{ 'SUBMIT' }}</ion-button>
+      <ion-button *ngIf="loading" class="ion-no-padding action-btn" color="primary" shape="round" expand="block"
+        disabled><ion-spinner color="light" name="crescent"></ion-spinner></ion-button>
+    </form>
+  </div>
 </ion-content>

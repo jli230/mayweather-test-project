@@ -32,7 +32,7 @@ export class LoginPage implements OnInit {
     public formBuilder: FormBuilder,
     // public events: EventsService,
     // public storage: Storage,
-    // private router: Router
+    private router: Router,
     private http: HttpClient
   ) {
     this.loginForm = this.formBuilder.group({
@@ -137,6 +137,15 @@ export class LoginPage implements OnInit {
       // console.log(data);
     });
     console.log(this.authToken);
+    if (this.authToken != '') {
+      this.router.navigate(['tab1']);
+    }
+    // this.http
+    //   .get('https://api.accuropt.com/mayweather/workout-of-the-day/2023/8/8')
+    //   .subscribe((response) => {
+    //     console.log(response);
+    //   });
+
   }
     // if (!this.loginForm.value.identifier) {
     //   this.utils.presentToastWithTranslate('WARNING_EMPTY_IDENTIFIER', {
