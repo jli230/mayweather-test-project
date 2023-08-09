@@ -33,4 +33,14 @@
         disabled><ion-spinner color="light" name="crescent"></ion-spinner></ion-button>
     </form>
   </div>
+  <ion-list>
+    <ion-item *ngFor="let item of this.data">
+      Section ID: {{item.sectionId}}
+      <br>Video Title: {{item.sectionTitle}}
+      <br>Description: {{item.sectionDescription}}
+      <br>Video Duration (In Seconds): {{item.sectionSeconds}}
+      <br>Video Link: {{item.sectionVideo}}
+      <!-- <iframe [src]="item.sectionVideo"></iframe> -->
+    </ion-item>
+  </ion-list>
 </ion-content>

@@ -14,6 +14,7 @@ export class Tab1Page {
   public day : number;
   public month : number;
   public year : number;
+  public data: any[];
   constructor(
     public formBuilder: FormBuilder,
     private router: Router,
@@ -22,6 +23,7 @@ export class Tab1Page {
     this.day = 1;
     this.month = 1;
     this.year = 2023;
+    this.data = [];
     this.listForm = this.formBuilder.group({
       day: ['', Validators.required],
       month: ['', Validators.required],
@@ -43,6 +45,7 @@ export class Tab1Page {
     .then( data => {
       // this.authToken = data.data.token;
       console.log(data.data.sections);
+      this.data = data.data.sections;
     });
   }
 }
