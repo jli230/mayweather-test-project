@@ -3,11 +3,12 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 // import { Storage } from '@ionic/storage-angular';
 // import { EventsService } from 'src/app/providers/events-service/events.service';
-// import { UserService } from 'src/app/providers/user-service/user.service';
+import { UserService } from 'src/app/service/user/user.service';
 // import { UtilsService } from 'src/app/providers/utils/utils.service';
 // import { isValidEmail, isValidPhoneNumber } from 'src/app/utils/validators';
 import { AuthResponse, IdentityType, VerificationFrom, VerificationParams, PostData } from 'src/types/user';
 import { HttpClient, HttpHeaders, HttpRequest } from '@angular/common/http';
+// import { ApiService } from '../service/api/api.service';
 
 import { HTTP } from '@awesome-cordova-plugins/http/ngx';
 
@@ -29,7 +30,9 @@ export class LoginPage implements OnInit {
     // private zone: NgZone,
     // public userService: UserService,
     // public utils: UtilsService,
+    public userService: UserService,
     public formBuilder: FormBuilder,
+    // public apiService: ApiService,
     // public events: EventsService,
     // public storage: Storage,
     private router: Router,
@@ -108,7 +111,7 @@ export class LoginPage implements OnInit {
   //   this.router.navigate(['/user/forgot-password'], { queryParams: params });
   // }
 
-  onLogin() {
+  async onLogin() {
     // this.http
     //   .post('https://api.accuropt.com/apt/users/actions/login', {
     //     email: this.loginForm.value.identifier,
@@ -121,7 +124,10 @@ export class LoginPage implements OnInit {
     //     // this.testarray = response.data.json();
     //     // this.authToken = response.data;
     //   });
-    fetch("https://api.accuropt.com/apt/users/actions/login", {
+
+    //old code
+
+    /* fetch("https://api.accuropt.com/apt/users/actions/login", {
       method: "POST",
       body: JSON.stringify({
         email: this.loginForm.value.identifier,
@@ -136,6 +142,17 @@ export class LoginPage implements OnInit {
       this.authToken = data.data.token;
       // console.log(data);
     });
+    console.log(this.authToken);
+    if (this.authToken != '') {
+      this.router.navigate(['tab1']);
+    }
+    */
+
+    // new code
+    // console.log(this.authToken);
+
+    this.authToken = await this.userService
+      .login(this.loginForm.value.identifier, this.loginForm.value.password);
     console.log(this.authToken);
     if (this.authToken != '') {
       this.router.navigate(['tab1']);
